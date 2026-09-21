@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GG - Trova il tuo compagno di gioco</title>
+  <meta name="description" content="GG è l'app che connette i giocatori. Trova il tuo TM8, chatta, gioca e costruisci la tua reputazione.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #0a0a0f; background-image: linear-gradient(135deg, #0a0a0f 0%, #1a0030 100%); color: #ffffff; line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 20px 40px; text-align: center; }
+    .logo { font-size: 96px; font-weight: bold; color: #00f5ff; letter-spacing: 16px; margin-bottom: 8px; text-shadow: 0 0 30px #00f5ff, 0 0 60px rgba(0, 245, 255, 0.5); animation: glow 2s ease-in-out infinite alternate; }
+    @keyframes glow { from { text-shadow: 0 0 20px #00f5ff, 0 0 40px rgba(0, 245, 255, 0.5); } to { text-shadow: 0 0 40px #00f5ff, 0 0 80px rgba(0, 245, 255, 0.8); } }
+    .subtitle { color: #7a7a9d; font-size: 14px; letter-spacing: 6px; margin-bottom: 40px; }
+    .tagline { font-size: 26px; color: #ffffff; margin-bottom: 16px; line-height: 1.4; font-weight: 600; }
+    .tagline span { color: #00f5ff; }
+    .description { font-size: 16px; color: #aaa; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
+    .cta-button { display: inline-block; background: linear-gradient(135deg, #00f5ff 0%, #00b8c4 100%); color: #000000; padding: 18px 48px; font-size: 16px; font-weight: bold; letter-spacing: 3px; text-decoration: none; border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 245, 255, 0.35); transition: all 0.3s ease; }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0, 245, 255, 0.55); }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin: 80px 0 60px; text-align: left; }
+    .feature { background-color: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 12px; padding: 24px; transition: all 0.3s ease; }
+    .feature:hover { border-color: #00f5ff; transform: translateY(-4px); }
+    .feature-icon { font-size: 36px; margin-bottom: 12px; }
+    .feature h3 { color: #00f5ff; font-size: 16px; letter-spacing: 2px; margin-bottom: 8px; }
+    .feature p { color: #aaa; font-size: 14px; line-height: 1.5; }
+    .footer { margin-top: 60px; padding-top: 30px; border-top: 1px solid #1a1a2e; color: #7a7a9d; font-size: 12px; }
+    .footer-links { margin-bottom: 20px; }
+    .footer-links a { color: #7a7a9d; text-decoration: none; margin: 0 12px; transition: color 0.2s; }
+    .footer-links a:hover { color: #00f5ff; }
+    @media (max-width: 480px) { .logo { font-size: 64px; letter-spacing: 10px; } .tagline { font-size: 20px; } .container { padding: 40px 16px 30px; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">GG</div>
+    <div class="subtitle">GAME PARTNER</div>
+    <h1 class="tagline">Trova il tuo <span>compagno di gioco</span> perfetto</h1>
+    <p class="description">GG è l'app che connette i giocatori di tutto il mondo. Cerca il tuo TM8 ideale, chatta, organizza partite e costruisci la tua reputazione nella community.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.d4rf7.GG" class="cta-button">SCARICA SU GOOGLE PLAY</a>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🎮</div>
+        <h3>TROVA TM8</h3>
+        <p>Match intelligente basato sui tuoi giochi, rank, piattaforma e orari di disponibilità.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h3>CHAT INTEGRATA</h3>
+        <p>Parla con i tuoi compagni tramite chat private e di gruppo, direttamente nell'app.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⭐</div>
+        <h3>REPUTAZIONE</h3>
+        <p>Ricevi recensioni dagli altri giocatori e sali di livello nella classifica globale.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <h3>AMBIENTE SICURO</h3>
+        <p>Sistema di moderazione, blocco utenti e segnalazioni per una community rispettosa.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer-links">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/child-safety/">Sicurezza Minori</a>
+        <a href="/terms/">Termini di Servizio</a>
+      </div>
+      <div>© 2025 GG APP - Tutti i diritti riservati</div>
+    </div>
+  </div>
+</body>
+</html>
