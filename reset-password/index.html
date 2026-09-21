@@ -85,27 +85,24 @@
     const successState = document.getElementById('success-state');
     const messageEl = document.getElementById('message');
 
-    let sessionReady = false;
+    let tokenHash = null;
+    let actionType = null;
 
-    async function init() {
-      try {
-        const { data, error } = await supabase.auth.getSessionFromUrl({ storeSession: true });
-        if (error || !data?.session) {
-          const { data: existing } = await supabase.auth.getSession();
-          if (existing?.session) {
-            sessionReady = true;
-            showForm();
-            return;
-          }
-          showError();
-          return;
-        }
-        sessionReady = true;
-        showForm();
-      } catch (e) {
-        console.error('Errore init:', e);
+    function init() {
+      // Legge i parametri dall'URL (?token_hash=xxx&type=recovery)
+      const params = new URLSearchParams(window.location.search);
+      tokenHash = params.get('token_hash');
+      actionType = params.get('type') || 'recovery';
+
+      console.log('Token hash:', tokenHash ? 'presente' : 'assente');
+      console.log('Tipo azione:', actionType);
+
+      if (!tokenHash) {
         showError();
+        return;
       }
+
+      showForm();
     }
 
     function showForm() {
@@ -153,8 +150,8 @@
         return;
       }
 
-      if (!sessionReady) {
-        showMessage('Sessione non valida. Richiedi un nuovo link.', 'error');
+      if (!tokenHash) {
+        showMessage('Link non valido. Richiedi un nuovo reset dall\'app.', 'error');
         return;
       }
 
@@ -162,17 +159,37 @@
       btn.textContent = '...';
 
       try {
-        const { error } = await supabase.auth.updateUser({ password: pwd });
+        // 1. Verifica il token hash → crea una sessione temporanea
+        const { error: verifyError } = await supabase.auth.verifyOtp({
+          token_hash: tokenHash,
+          type: actionType,
+        });
 
-        if (error) {
-          showMessage(error.message || 'Errore durante l\'aggiornamento.', 'error');
+        if (verifyError) {
+          console.error('Errore verifyOtp:', verifyError);
+          showMessage('Link scaduto o non valido. Richiedine uno nuovo.', 'error');
           btn.disabled = false;
           btn.textContent = 'CONFERMA';
           return;
         }
 
+        // 2. Ora che abbiamo una sessione, aggiorna la password
+        const { error: updateError } = await supabase.auth.updateUser({ password: pwd });
+
+        if (updateError) {
+          console.error('Errore updateUser:', updateError);
+          showMessage(updateError.message || 'Errore durante l\'aggiornamento.', 'error');
+          btn.disabled = false;
+          btn.textContent = 'CONFERMA';
+          return;
+        }
+
+        // 3. Logout per pulizia (l'utente deve fare login con la nuova password nell'app)
+        await supabase.auth.signOut();
+
         showSuccess();
       } catch (e) {
+        console.error('Errore:', e);
         showMessage('Errore di rete. Riprova.', 'error');
         btn.disabled = false;
         btn.textContent = 'CONFERMA';
